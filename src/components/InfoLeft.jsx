@@ -24,10 +24,17 @@ const InfoLeft = ({ darkMode, toggleDarkMode }) => {
   ];
 
   return (
-    <div className="min-h-screen flex-1 relative p-10 transition-colors duration-300 ease-in-out dark:bg-black dark:text-white sm:border-r border-gray-300 dark:border-gray-700">
-      {/* Profile Image */}
+    <div className="min-h-screen flex-1 relative p-5 transition-colors duration-300 ease-in-out dark:bg-black dark:text-white sm:border-r border-gray-300 dark:border-gray-700">
+      {/* Profile Picture */}
       <div className="flex flex-col items-center justify-center gap-4 mb-6">
-        <img src={image} alt="Profile Pic" className="w-32 rounded-full" />
+        <img
+          src={image}
+          alt="User profile picture"
+          className="w-32 h-32 rounded-full object-cover"
+          onError={(e) => {
+            e.target.src = "fallback-avatar.png"; // or handle differently
+          }}
+        />
       </div>
 
       {/* Name and Title */}
@@ -120,9 +127,13 @@ const InfoLeft = ({ darkMode, toggleDarkMode }) => {
       </div>
 
       {/* Education Timeline */}
-      <div className="flex flex-col gap-5 border-b border-gray-300 dark:border-gray-700 py-5 px-5 antialiased">
+      <div className="flex flex-col justify-start gap-5 border-b border-gray-300 dark:border-gray-700 py-5 px-5 antialiased">
         <h1 className="font-clash font-semibold md:text-2xl">EDUCATION</h1>
-        <ul className="space-y-4">
+
+        <ul className="relative pl-3 space-y-4">
+          {/* Vertical line for the entire timeline */}
+          <div className="absolute left-2 top-0 bottom-0 w-[2px] bg-gray-300 dark:bg-gray-700"></div>
+
           {[
             {
               title: "BE Computer",
@@ -143,11 +154,10 @@ const InfoLeft = ({ darkMode, toggleDarkMode }) => {
             <li
               key={i}
               className="
-  relative flex flex-col gap-1 pl-6 p-4
-  before:content-[''] before:absolute before:left-2 before:top-0 before:bottom-0 before:w-[2px] before:bg-gray-300 before:dark:bg-gray-700
-  after:content-[''] after:absolute after:left-1 after:top-1/2 after:-translate-y-1/2 after:h-3 after:w-3 after:rounded-full after:bg-black after:dark:bg-gray-200
-  transition-all duration-300 ease-in-out
-"
+          relative flex flex-col gap-1 pl-5 p-4
+          after:content-[''] after:absolute after:-left-2 after:top-1/2 after:-translate-y-1/2
+          after:h-3 after:w-3 after:rounded-full after:bg-black after:dark:bg-gray-200
+        "
             >
               <span className="font-clash font-semibold md:text-lg">
                 {edu.title}
