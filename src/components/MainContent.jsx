@@ -1,65 +1,62 @@
 import React from "react";
 
-const MainContent = () => {
+const MainContent = ({ darkMode }) => {
   return (
-    <div className="min-h-screen flex-3 relative p-10 transition-colors duration-300 ease-in-out dark:bg-black dark:text-white sm:border-gray-200 antialiased">
-      <div id="summary" className="flex flex-col justify-start space-y-3">
+    <div className={`w-full min-h-screen flex flex-col p-6 md:p-10 transition-colors duration-500 ease-in-out ${darkMode ? "bg-black text-white" : "bg-white text-black"} antialiased`}>
+
+      {/* About Section */}
+      <div id="summary" className="flex flex-col space-y-3">
         <h1 className="font-clash font-semibold md:text-2xl">About</h1>
         <p className="font-archivo md:text-lg">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem,
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem,
           autem aperiam illum, alias recusandae cumque laboriosam vero a modi
           natus debitis, obcaecati animi facere dolore distinctio harum
-          quibusdam eius itaque! Officia, dicta? Eligendi rem maiores quisquam
-          quas cumque harum earum id delectus, quod quos unde nam, cum
-          praesentium, enim ratione pariatur ipsa. Fugit consectetur laudantium,
-          saepe ab voluptate id aut. Sequi qui odio distinctio, alias architecto
-          consequuntur quaerat. Consectetur nobis deserunt deleniti, natus rerum
-          necessitatibus eaque! Deleniti sequi totam dolor natus facilis dolorum
-          nesciunt, iure veritatis tenetur fuga, dolorem odit!
+          quibusdam eius itaque!
         </p>
       </div>
 
       {/* Experience Section */}
       <section id="experience" className="my-7 flex flex-col">
         <h1 className="font-clash font-semibold md:text-2xl">Experience</h1>
+        <div className="relative mt-6 pl-8 md:pl-10">
+          {/* Vertical line */}
+          <div className={`absolute left-3 md:left-5 top-1 bottom-0 w-[2px] ${darkMode ? "bg-gray-700" : "bg-gray-300"}`}></div>
 
-        <ul className="relative mt-6 pl-6 space-y-6">
-          {/* Vertical line for the entire timeline */}
-          <div className="absolute left-2 top-0 bottom-0 w-[2px] bg-gray-300 dark:bg-gray-700"></div>
+          {/* Timeline items */}
+          {[
+            {
+              title: "Associate",
+              company: "Company X",
+              duration: "July - Dec 2025",
+              desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+            },
+            {
+              title: "Software Intern",
+              company: "Company Y",
+              duration: "Jan - Jun 2025",
+              desc: "Worked on building responsive UI components and integrating APIs."
+            },
+            {
+              title: "Software Intern",
+              company: "Company Y",
+              duration: "Jan - Jun 2025",
+              desc: "Worked on building responsive UI components and integrating APIs. Additional description for testing long text on mobile."
+            }
+          ].map((exp, idx) => (
+            <div key={idx} className="relative flex flex-col md:flex-row gap-3 md:gap-5 mb-8">
+              {/* Circle */}
+              <div className={`absolute -left-6 top-1 md:top-3 w-3 h-3 rounded-full ${darkMode ? "bg-white" : "bg-black"}`}></div>
 
-          {/* Experience Item 1 */}
-          <li className="relative flex flex-col gap-1 pl-4 pb-4 after:content-[''] after:absolute after:-left-[21px] after:top-1/2 after:-translate-y-1/2 after:h-3 after:w-3 after:rounded-full after:bg-black dark:after:bg-white">
-            <span className="text-xl font-clash font-semibold">Associate</span>
-            <span className="font-archivo font-light text-md">Company X</span>
-            <span className="text-sm text-gray-400 font-archivo">
-              July - Dec 2025
-            </span>
-            <p className="text-md font-archivo font-light">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
-              similique quibusdam, adipisci earum beatae reprehenderit. Porro,
-              illo voluptatibus! Assumenda, expedita? Ducimus asperiores vitae
-              excepturi nobis mollitia magnam sit amet aperiam!
-            </p>
-          </li>
-
-          {/* Experience Item 2 */}
-          <li className="relative flex flex-col gap-1 pl-6 pb-4 after:content-[''] after:absolute after:-left-[21px] after:top-1/2 after:-translate-y-1/2 after:h-3 after:w-3 after:rounded-full after:bg-black dark:after:bg-white">
-            <span className="text-xl font-clash font-semibold">
-              Software Intern
-            </span>
-            <span className="font-archivo font-light text-md">Company Y</span>
-            <span className="text-sm text-gray-400 font-archivo">
-              Jan - Jun 2025
-            </span>
-            <p className="text-md font-archivo font-light">
-              Worked on building responsive UI components and integrating APIs.
-              Collaborated with the team to improve the application workflow and
-              UI performance.
-            </p>
-          </li>
-
-          {/* Add more experience items as needed */}
-        </ul>
+              {/* Content */}
+              <div className="pl-4  flex flex-col gap-1">
+                <span className="text-lg md:text-xl font-clash font-semibold">{exp.title}</span>
+                <span className="font-archivo font-light text-md">{exp.company}</span>
+                <span className="text-sm text-gray-400 font-archivo">{exp.duration}</span>
+                <p className={`text-md font-archivo font-light ${darkMode ? "text-white" : "text-black"}`}>{exp.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </section>
     </div>
   );
